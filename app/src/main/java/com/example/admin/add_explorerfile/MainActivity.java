@@ -1,6 +1,8 @@
 package com.example.admin.add_explorerfile;
 
 import android.app.ListActivity;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -103,6 +105,11 @@ public class MainActivity extends ListActivity {
             Toast.makeText(this,
                     "Has seleccionado el archivo: " + archivo.getName(),
                     Toast.LENGTH_LONG).show();
+
+            //Lanzamos el intent con el PATH del archivo
+            Intent intent = new Intent(Intent.ACTION_GET_CONTENT,Uri.fromFile(archivo));
+            intent.setType("*/*");
+            startActivity(intent);
         } else {
             // Si no es un directorio mostramos todos los archivos que contiene
             verArchivosDirectorio(listaRutasArchivos.get(position));
